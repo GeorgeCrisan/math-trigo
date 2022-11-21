@@ -1,5 +1,4 @@
-// Helper X Y item factory
-const xyItem = (x = 0, y = 0) => ({ x, y });
+import { xyItem, drawPoint, drawCS, drawText, drawLine } from "./helpers";
 
 // Declare default points
 // Have to be at the top to be reachable by other functions
@@ -20,9 +19,6 @@ ctx.translate(offset.x, offset.y);
 
 
 // *** Helpers *** 
-
-// Redraw canvas 
-
 const renderCanvas = (ctx) => {
     // Clear the canvas
     ctx.clearRect(-offset.x, -offset.y, canvas.width, canvas.height);
@@ -31,50 +27,19 @@ const renderCanvas = (ctx) => {
     drawCS(ctx, offset);
 
     // Draw the points of the triangle
-    drawPoint(ctx, A);
+    drawPoint(ctx, A, 15);
     drawText(ctx, "A", A);
-    drawPoint(ctx, B);
+    drawPoint(ctx, B, 15);
     drawText(ctx, "B", B);
-    drawPoint(ctx, C);
+    drawPoint(ctx, C, 15);
     drawText(ctx, "C", C);
+
+    // Draw lines between points
+    drawLine(ctx, A, B, "red");
+    drawLine(ctx, B, C);
+    drawLine(ctx, C, A);
 };
 
-
-// Draw Coordinates System
-
-const drawCS = (ctx, offset) => {
-    // Create marks
-    ctx.beginPath();
-    ctx.moveTo(0, - offset.y);
-    ctx.lineTo(0, ctx.canvas.height - offset.y);
-    ctx.moveTo(- offset.x, 0);
-    ctx.lineTo(ctx.canvas.width - offset.x, 0);
-    ctx.setLineDash([3, 5]);
-    ctx.lineWidth = 1;
-    ctx.stokeStyle = "555";
-    ctx.stroke();
-    // Reset line dash
-    ctx.setLineDash([]);
-}
-
-
-// Create a point
-const drawPoint = (ctx, location, size = 20, color = "black") => {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.arc(location.x, location.y, size, 0, Math.PI * 2);
-    ctx.fill();
-}
-
-// Write text 
-const drawText = (ctx, text = "N", location, color = "white") => {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = "bold 13px sans-serif";
-    ctx.fillText(text, location.x, location.y);
-};
 
 // *** Events *** 
 
