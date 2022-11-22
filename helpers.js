@@ -6,6 +6,8 @@ export const drawPoint = (ctx, location, size = 10, color = "black") => {
     ctx.fill();
 }
 
+export const toDeg =(rad) => Math.round(rad * 180 / Math.PI);
+
 // Draw line
 export const drawLine = (ctx, p1, p2, color = "black") => {
     ctx.beginPath();

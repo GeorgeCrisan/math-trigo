@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "drawLine": function() { return /* binding */ drawLine; },
 /* harmony export */   "drawPoint": function() { return /* binding */ drawPoint; },
 /* harmony export */   "drawText": function() { return /* binding */ drawText; },
+/* harmony export */   "toDeg": function() { return /* binding */ toDeg; },
 /* harmony export */   "xyItem": function() { return /* binding */ xyItem; }
 /* harmony export */ });
 // Create a point
@@ -23,6 +24,9 @@ var drawPoint = function drawPoint(ctx, location) {
   ctx.fillStyle = color;
   ctx.arc(location.x, location.y, size, 0, Math.PI * 2);
   ctx.fill();
+};
+var toDeg = function toDeg(rad) {
+  return Math.round(rad * 180 / Math.PI);
 };
 
 // Draw line
@@ -179,25 +183,69 @@ var renderCanvas = function renderCanvas(ctx) {
   var b = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.distance)(A, C);
   var c = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.distance)(A, B);
 
+  // Calculate sin cos and tangent
+  var sin = a / c;
+  var cos = b / c;
+  var tangent = a / b;
+  var theta = Math.asin(sin);
+
+  // Draw info to the canvas. The values for sin cos and tangent
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "sin = a/c = " + sin.toFixed(2), {
+    x: -offset.x / 2,
+    y: offset.y * 0.7
+  }, "black");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "cos = b/c = " + cos.toFixed(2), {
+    x: -offset.x / 2,
+    y: offset.y * 0.8
+  }, "magenta");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "tan = a/b = " + tangent.toFixed(2), {
+    x: -offset.x / 2,
+    y: offset.y * 0.9
+  }, "teal");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "Theta - Radiant:" + theta.toFixed(2) + " Degree: " + String((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toDeg)(theta)).padStart(2, " ") + "°", {
+    x: offset.x / 2,
+    y: offset.y * 0.7
+  }, "magenta");
+
   // Draw the points of the triangle
   // drawPoint(ctx, A);
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "θ", A, "black");
+  // drawText(ctx, "A", A);
   // drawPoint(ctx, B);
   // drawText(ctx, "B", B);
   // drawPoint(ctx, C);
   // drawText(ctx, "C", C);
 
-  // Draw lines between points
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, A, B, "blue");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "c:" + c.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "blue");
+  // Draw the middle of the canvas
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "θ", A, "pink");
+
+  // Draw lines between points, color them as RGB
   (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, B, C, "red");
   (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "a:" + a.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(B, C), "red");
   (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, C, A, "green");
   (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "b:" + b.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(C, A), "green");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, A, B, "blue");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "c:" + c.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "blue");
+
+  // Style "arc"
+  ctx.beginPath();
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 3;
+
+  // calculate the "arc" logic
+  var start = B.x > A.x ? 0 : Math.PI;
+  var cw = B.y < C.y ^ B.x > A.x;
+  var end = B.y < C.y ? -theta : theta;
+  if (B.x < A.x) {
+    end = Math.PI - end;
+  }
+
+  // Draw arc 
+  ctx.arc(0, 0, 50, start, end, !cw);
+  ctx.stroke();
 };
 
 // *** Events *** 
-
+// Redraw the canvas on mouse move
 document.onmousemove = function (event) {
   // Move x and y
   B.x = event.x - offset.x;
@@ -207,12 +255,10 @@ document.onmousemove = function (event) {
   C.x = B.x;
 
   // A is static, point 0 (center)
-  // Redraw the canvas
   renderCanvas(ctx);
 };
 
-// *** Start Drawing
-
+// *** Start Drawing, render the canvas on load, before any mouse move event
 renderCanvas(ctx);
 }();
 /******/ })()
