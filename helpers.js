@@ -1,5 +1,5 @@
 // Create a point
-export const drawPoint = (ctx, location, size = 20, color = "black") => {
+export const drawPoint = (ctx, location, size = 10, color = "black") => {
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.arc(location.x, location.y, size, 0, Math.PI * 2);
@@ -7,14 +7,15 @@ export const drawPoint = (ctx, location, size = 20, color = "black") => {
 }
 
 // Draw line
-export const drawLine = (ctx, p1, p2, color = "green") => {
+export const drawLine = (ctx, p1, p2, color = "black") => {
     ctx.beginPath();
     ctx.stokeStyle = color;
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 2;
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
     ctx.stroke();
 }
+
 
 // Write text 
 export const drawText = (ctx, text = "N", location, color = "white") => {
@@ -22,7 +23,8 @@ export const drawText = (ctx, text = "N", location, color = "white") => {
     ctx.fillStyle = color;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "bold 13px sans-serif";
+    ctx.font = "bold 16px sans-serif";
+    ctx.strokeText(text, location.x, location.y);
     ctx.fillText(text, location.x, location.y);
 };
 
@@ -44,3 +46,10 @@ export const drawCS = (ctx, offset) => {
 
 // Helper X Y item factory
 export const xyItem = (x = 0, y = 0) => ({ x, y });
+
+export const average = (p1, p2) => ({
+    x: ((p1.x + p2.x) / 2),
+    y: ((p1.y + p2.y) / 2)
+});
+
+export const distance = (p1, p2) => Math.hypot(p1.x - p2.x, p1.y - p2.y);

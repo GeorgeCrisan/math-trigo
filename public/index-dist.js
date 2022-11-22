@@ -1,2 +1,218 @@
-!function(){"use strict";var e=[,function(e,t,n){n.r(t),n.d(t,{drawCS:function(){return a},drawLine:function(){return r},drawPoint:function(){return o},drawText:function(){return i},xyItem:function(){return d}});var o=function(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:20,o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:"black";e.beginPath(),e.fillStyle=o,e.arc(t.x,t.y,n,0,2*Math.PI),e.fill()},r=function(e,t,n){var o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:"green";e.beginPath(),e.stokeStyle=o,e.lineWidth=1,e.moveTo(t.x,t.y),e.lineTo(n.x,n.y),e.stroke()},i=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"N",n=arguments.length>2?arguments[2]:void 0,o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:"white";e.beginPath(),e.fillStyle=o,e.textAlign="center",e.textBaseline="middle",e.font="bold 13px sans-serif",e.fillText(t,n.x,n.y)},a=function(e,t){e.beginPath(),e.moveTo(0,-t.y),e.lineTo(0,e.canvas.height-t.y),e.moveTo(-t.x,0),e.lineTo(e.canvas.width-t.x,0),e.setLineDash([3,5]),e.lineWidth=1,e.stokeStyle="555",e.stroke(),e.setLineDash([])},d=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0,t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0;return{x:e,y:t}}}],t={};function n(o){var r=t[o];if(void 0!==r)return r.exports;var i=t[o]={exports:{}};return e[o](i,i.exports,n),i.exports}n.d=function(e,t){for(var o in t)n.o(t,o)&&!n.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};var o={};!function(){n.r(o);var e=n(1),t=(0,e.xyItem)(),r=(0,e.xyItem)(90,120),i=(0,e.xyItem)(90),a=document.getElementById("rdpCan"),d=a.getContext("2d"),l=(0,e.xyItem)(a.width/2,a.height/2);d.translate(l.x,l.y);var u=function(n){n.clearRect(-l.x,-l.y,a.width,a.height),(0,e.drawCS)(n,l),(0,e.drawPoint)(n,t,15),(0,e.drawText)(n,"A",t),(0,e.drawPoint)(n,r,15),(0,e.drawText)(n,"B",r),(0,e.drawPoint)(n,i,15),(0,e.drawText)(n,"C",i),(0,e.drawLine)(n,t,r,"red"),(0,e.drawLine)(n,r,i),(0,e.drawLine)(n,i,t)};document.onmousemove=function(e){r.x=e.x-l.x,r.y=e.y-l.y,i.x=r.x,u(d)},u(d)}()}();
+/******/ (function() { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "average": function() { return /* binding */ average; },
+/* harmony export */   "distance": function() { return /* binding */ distance; },
+/* harmony export */   "drawCS": function() { return /* binding */ drawCS; },
+/* harmony export */   "drawLine": function() { return /* binding */ drawLine; },
+/* harmony export */   "drawPoint": function() { return /* binding */ drawPoint; },
+/* harmony export */   "drawText": function() { return /* binding */ drawText; },
+/* harmony export */   "xyItem": function() { return /* binding */ xyItem; }
+/* harmony export */ });
+// Create a point
+var drawPoint = function drawPoint(ctx, location) {
+  var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "black";
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.arc(location.x, location.y, size, 0, Math.PI * 2);
+  ctx.fill();
+};
+
+// Draw line
+var drawLine = function drawLine(ctx, p1, p2) {
+  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "black";
+  ctx.beginPath();
+  ctx.stokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.moveTo(p1.x, p1.y);
+  ctx.lineTo(p2.x, p2.y);
+  ctx.stroke();
+};
+
+// Write text 
+var drawText = function drawText(ctx) {
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "N";
+  var location = arguments.length > 2 ? arguments[2] : undefined;
+  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "white";
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "bold 16px sans-serif";
+  ctx.strokeText(text, location.x, location.y);
+  ctx.fillText(text, location.x, location.y);
+};
+
+// Draw Coordinates System
+var drawCS = function drawCS(ctx, offset) {
+  // Create marks
+  ctx.beginPath();
+  ctx.moveTo(0, -offset.y);
+  ctx.lineTo(0, ctx.canvas.height - offset.y);
+  ctx.moveTo(-offset.x, 0);
+  ctx.lineTo(ctx.canvas.width - offset.x, 0);
+  ctx.setLineDash([3, 5]);
+  ctx.lineWidth = 1;
+  ctx.stokeStyle = "555";
+  ctx.stroke();
+  // Reset line dash
+  ctx.setLineDash([]);
+};
+
+// Helper X Y item factory
+var xyItem = function xyItem() {
+  var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return {
+    x: x,
+    y: y
+  };
+};
+var average = function average(p1, p2) {
+  return {
+    x: (p1.x + p2.x) / 2,
+    y: (p1.y + p2.y) / 2
+  };
+};
+var distance = function distance(p1, p2) {
+  return Math.hypot(p1.x - p2.x, p1.y - p2.y);
+};
+
+/***/ })
+/******/ 	]);
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	!function() {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = function(exports) {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+!function() {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+
+// Declare default points
+// Have to be at the top to be reachable by other functions
+var A = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.xyItem)();
+var B = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.xyItem)(90, 120);
+var C = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.xyItem)(90);
+
+// Prepare the canvas
+// Init the canvas
+var canvas = document.getElementById("rdpCan");
+var ctx = canvas.getContext("2d");
+
+// This is the center of the canvas
+var offset = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.xyItem)(canvas.width / 2, canvas.height / 2);
+
+// Move to the center
+ctx.translate(offset.x, offset.y);
+
+// *** Helpers *** 
+var renderCanvas = function renderCanvas(ctx) {
+  // Clear the canvas
+  ctx.clearRect(-offset.x, -offset.y, canvas.width, canvas.height);
+
+  // Draw marks
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawCS)(ctx, offset);
+  var a = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.distance)(B, C);
+  var b = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.distance)(A, C);
+  var c = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.distance)(A, B);
+
+  // Draw the points of the triangle
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(ctx, A);
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "θ", A);
+  // drawPoint(ctx, B);
+  // drawText(ctx, "B", B);
+  // drawPoint(ctx, C);
+  // drawText(ctx, "C", C);
+
+  // Draw lines between points
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, A, B);
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "c:" + c.toFixed(2), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "red");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, B, C);
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "a:" + a.toFixed(2), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(B, C), "green");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, C, A);
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "b:" + b.toFixed(2), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(C, A), "blue");
+};
+
+// *** Events *** 
+
+document.onmousemove = function (event) {
+  // Move x and y
+  B.x = event.x - offset.x;
+  B.y = event.y - offset.y;
+
+  // C follow B.x
+  C.x = B.x;
+
+  // A is static, point 0 (center)
+  // Redraw the canvas
+  renderCanvas(ctx);
+};
+
+// *** Start Drawing
+
+renderCanvas(ctx);
+}();
+/******/ })()
+;
 //# sourceMappingURL=index-dist.js.map

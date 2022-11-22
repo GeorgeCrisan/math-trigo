@@ -1,4 +1,4 @@
-import { xyItem, drawPoint, drawCS, drawText, drawLine } from "./helpers";
+import { xyItem, drawPoint, drawCS, drawText, drawLine, average, distance } from "./helpers";
 
 // Declare default points
 // Have to be at the top to be reachable by other functions
@@ -26,18 +26,25 @@ const renderCanvas = (ctx) => {
     // Draw marks
     drawCS(ctx, offset);
 
+    const a = distance(B, C);
+    const b = distance(A, C);
+    const c = distance(A, B);
+
     // Draw the points of the triangle
-    drawPoint(ctx, A, 15);
-    drawText(ctx, "A", A);
-    drawPoint(ctx, B, 15);
-    drawText(ctx, "B", B);
-    drawPoint(ctx, C, 15);
-    drawText(ctx, "C", C);
+    drawPoint(ctx, A);
+    drawText(ctx, "θ", A);
+    // drawPoint(ctx, B);
+    // drawText(ctx, "B", B);
+    // drawPoint(ctx, C);
+    // drawText(ctx, "C", C);
 
     // Draw lines between points
-    drawLine(ctx, A, B, "red");
+    drawLine(ctx, A, B);
+    drawText(ctx, "c:" + c.toFixed(2), average(A, B),  "red");
     drawLine(ctx, B, C);
+    drawText(ctx, "a:" + a.toFixed(2),  average(B, C), "green");
     drawLine(ctx, C, A);
+    drawText(ctx, "b:" + b.toFixed(2),  average(C, A), "blue");
 };
 
 
@@ -51,8 +58,8 @@ document.onmousemove = (event) => {
     // C follow B.x
     C.x = B.x;
 
-    // A is static
-    // Re draw the canvas
+    // A is static, point 0 (center)
+    // Redraw the canvas
     renderCanvas(ctx);
 }
 
