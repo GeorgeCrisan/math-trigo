@@ -24,27 +24,28 @@ const renderCanvas = (ctx) => {
     ctx.clearRect(-offset.x, -offset.y, canvas.width, canvas.height);
 
     // Draw marks
-    drawCS(ctx, offset);
+     drawCS(ctx, offset);
 
     const a = distance(B, C);
     const b = distance(A, C);
     const c = distance(A, B);
 
     // Draw the points of the triangle
-    drawPoint(ctx, A);
-    drawText(ctx, "θ", A);
+    // drawPoint(ctx, A);
+    drawText(ctx, "θ", A, "black");
     // drawPoint(ctx, B);
     // drawText(ctx, "B", B);
     // drawPoint(ctx, C);
     // drawText(ctx, "C", C);
 
     // Draw lines between points
-    drawLine(ctx, A, B);
-    drawText(ctx, "c:" + c.toFixed(2), average(A, B),  "red");
-    drawLine(ctx, B, C);
-    drawText(ctx, "a:" + a.toFixed(2),  average(B, C), "green");
-    drawLine(ctx, C, A);
-    drawText(ctx, "b:" + b.toFixed(2),  average(C, A), "blue");
+    drawLine(ctx, A, B, "blue");
+    drawText(ctx, "c:" + c.toFixed(1), average(A, B),  "blue");
+    drawLine(ctx, B, C, "red");
+    drawText(ctx, "a:" + a.toFixed(1),  average(B, C), "red");
+    drawLine(ctx, C, A, "green");
+    drawText(ctx, "b:" + b.toFixed(1),  average(C, A), "green");
+
 };
 
 

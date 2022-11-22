@@ -9,7 +9,7 @@ export const drawPoint = (ctx, location, size = 10, color = "black") => {
 // Draw line
 export const drawLine = (ctx, p1, p2, color = "black") => {
     ctx.beginPath();
-    ctx.stokeStyle = color;
+    ctx.strokeStyle = color;
     ctx.lineWidth = 2;
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
@@ -18,12 +18,14 @@ export const drawLine = (ctx, p1, p2, color = "black") => {
 
 
 // Write text 
-export const drawText = (ctx, text = "N", location, color = "white") => {
+export const drawText = (ctx, text = "N", location, color = "black") => {
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "bold 16px sans-serif";
+    ctx.font = "16px sans-serif";
+    ctx.strokeStyle="white";
+    ctx.lineWidth=7;
     ctx.strokeText(text, location.x, location.y);
     ctx.fillText(text, location.x, location.y);
 };
@@ -38,7 +40,7 @@ export const drawCS = (ctx, offset) => {
     ctx.lineTo(ctx.canvas.width - offset.x, 0);
     ctx.setLineDash([3, 5]);
     ctx.lineWidth = 1;
-    ctx.stokeStyle = "555";
+    ctx.strokeStyle = "#555";
     ctx.stroke();
     // Reset line dash
     ctx.setLineDash([]);

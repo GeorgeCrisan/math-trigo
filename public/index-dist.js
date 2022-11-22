@@ -29,7 +29,7 @@ var drawPoint = function drawPoint(ctx, location) {
 var drawLine = function drawLine(ctx, p1, p2) {
   var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "black";
   ctx.beginPath();
-  ctx.stokeStyle = color;
+  ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.moveTo(p1.x, p1.y);
   ctx.lineTo(p2.x, p2.y);
@@ -40,12 +40,14 @@ var drawLine = function drawLine(ctx, p1, p2) {
 var drawText = function drawText(ctx) {
   var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "N";
   var location = arguments.length > 2 ? arguments[2] : undefined;
-  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "white";
+  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "black";
   ctx.beginPath();
   ctx.fillStyle = color;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = "bold 16px sans-serif";
+  ctx.font = "16px sans-serif";
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 7;
   ctx.strokeText(text, location.x, location.y);
   ctx.fillText(text, location.x, location.y);
 };
@@ -60,7 +62,7 @@ var drawCS = function drawCS(ctx, offset) {
   ctx.lineTo(ctx.canvas.width - offset.x, 0);
   ctx.setLineDash([3, 5]);
   ctx.lineWidth = 1;
-  ctx.stokeStyle = "555";
+  ctx.strokeStyle = "#555";
   ctx.stroke();
   // Reset line dash
   ctx.setLineDash([]);
@@ -178,20 +180,20 @@ var renderCanvas = function renderCanvas(ctx) {
   var c = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.distance)(A, B);
 
   // Draw the points of the triangle
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(ctx, A);
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "θ", A);
+  // drawPoint(ctx, A);
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "θ", A, "black");
   // drawPoint(ctx, B);
   // drawText(ctx, "B", B);
   // drawPoint(ctx, C);
   // drawText(ctx, "C", C);
 
   // Draw lines between points
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, A, B);
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "c:" + c.toFixed(2), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "red");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, B, C);
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "a:" + a.toFixed(2), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(B, C), "green");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, C, A);
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "b:" + b.toFixed(2), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(C, A), "blue");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, A, B, "blue");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "c:" + c.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "blue");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, B, C, "red");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "a:" + a.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(B, C), "red");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, C, A, "green");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "b:" + b.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(C, A), "green");
 };
 
 // *** Events *** 
