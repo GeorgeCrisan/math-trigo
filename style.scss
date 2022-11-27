@@ -1,9 +1,12 @@
-.rdpCan {
+.canvasStyle {
     background-color: honeydew;
+    position: fixed;
 }
 
 body {
+    margin-top: 5000px;
     background-color: teal;
+    height: 20000px;
     margin: 0;
     padding: 0;
 }
