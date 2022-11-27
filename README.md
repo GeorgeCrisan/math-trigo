@@ -10,7 +10,7 @@ Ok, how is this different from the original tutorial?
 - the code is commented and the main logic is short
 - There are two entries, index.html for the first part of the tutorial and full-circle.html for the second part.
   index.js is for the first part and index-circle.js use for second part, both files sharing the same helpers (helpers.js file)  
-- Circle implementation has an input that allows you to type numeric values for Theta
+- Circle implementation has an input that allows you to type numeric values for Theta (for the sake of precision)
 
 The project is using prepros which is free https://prepros.io/ \
 Prepros is used for bundling, minifying, transforming scss and js and for live reload.
