@@ -1,13 +1,13 @@
 import { xyItem, drawCS, drawText, drawLine, average, toDeg } from "./helpers";
 
 let theta = Math.PI / 4;
-let c = 100;
+let c = 200;
 
 // Declare default points
 // Have to be at the top to be reachable by other functions
-const A = xyItem();
-const B = xyItem( Math.cos(theta) * c, Math.sin(theta) * c );
-const C = xyItem(B.x);
+let A = xyItem();
+let B = xyItem( Math.cos(theta) * c, Math.sin(theta) * c );
+let C = xyItem(B.x);
 
 // Prepare the canvas
 // Init the canvas
@@ -34,18 +34,25 @@ const renderCanvas = (ctx) => {
     const sin = Math.sin(theta);
     const cos = Math.cos(theta);
     const tangent = Math.tan(theta);
+
+
+    // T tangent
+    const T = {
+        x: Math.hypot(1, tangent) * c,
+        y: 0
+    };
     
     // Draw info to the canvas. The values for sin cos and tangent
     drawText(ctx,
         "sin = a/c = " + sin.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.7 },
-        "black"
+        "green"
     )
 
     drawText(ctx,
         "cos = b/c = " + cos.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.8 },
-        "magenta"
+        "red"
     )
 
     drawText(ctx,
@@ -71,11 +78,16 @@ const renderCanvas = (ctx) => {
     // Draw the middle of the canvas
     drawText(ctx, "θ", A, "pink");
 
+    A = xyItem();
+    B = xyItem( Math.cos(theta) * c, Math.sin(theta) * c );
+    C = xyItem(B.x);
+
     // Draw lines between points, color them as RGB
     drawLine(ctx, B, C, "red");
     drawLine(ctx, C, A, "green");
     drawLine(ctx, A, B, "blue");
-    drawText(ctx, "c:" + c.toFixed(1), average(A, B), "blue");
+    drawLine(ctx, B, T, "magenta");
+    drawText(ctx, "Hypotenuse:" + c.toFixed(1), average(A, B), "blue");
     
 
     // Style "arc"
@@ -83,17 +95,9 @@ const renderCanvas = (ctx) => {
     ctx.strokeStyle = "black";
     ctx.lineWidth = 3;
     
-    // calculate the "arc" logic
-    const start = B.x > A.x ? 0 : Math.PI;
-    const cw = B.y < C.y ^ B.x > A.x;
-    let end = B.y < C.y ? - theta : theta;
-
-    if (B.x < A.x) {
-      end = Math.PI - end;
-    }
-
     // Draw arc 
-    ctx.arc(0, 0, 50, start, end, !cw);
+    // ctx.arc(0, 0, 50, 0, theta);
+    ctx.arc(0, 0, c, 0, theta);
     ctx.stroke();
 
 };
@@ -103,12 +107,19 @@ const renderCanvas = (ctx) => {
  // Redraw the canvas on mouse move
 let pos = 0;
 document.onscroll = (event) => { 
-    const current = window.scrollY.toFixed(0);
-    theta -=  current > pos ? - 0.1 : 0.1;
-    pos = current;
-    console.log("aaa");
+    const scrollY = window.scrollY.toFixed(0);
+
+    theta -=  scrollY > pos ? - 0.025 : 0.025;
+    pos = scrollY;
+
+    if (scrollY < 5 || scrollY > 15000) {
+        scrollTo(0, 5000);
+    }
+
     renderCanvas(ctx);
 };
 
+// On start set the position down to 5000px
+scrollTo(0, 5000);
 // *** Start Drawing, render the canvas on load, before any mouse move event
 renderCanvas(ctx);

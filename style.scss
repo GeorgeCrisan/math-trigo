@@ -1,12 +1,12 @@
 .canvasStyle {
     background-color: honeydew;
     position: fixed;
+    overflow: hidden;
 }
 
 body {
-    margin-top: 5000px;
     background-color: teal;
-    height: 20000px;
     margin: 0;
+    height: 20000px;
     padding: 0;
 }
