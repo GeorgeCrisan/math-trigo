@@ -60,7 +60,7 @@ const renderCanvas = (ctx) => {
     drawText(ctx,
         "Theta - Radiant:" + theta.toFixed(2) + " Degree: " + String(toDeg(theta)).padStart(2, " ") + "°",
         { x: offset.x / 2, y: offset.y * 0.7 },
-        "magenta"
+        "brown"
     )
 
     // Draw the points of the triangle
