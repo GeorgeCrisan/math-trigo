@@ -59,7 +59,7 @@ const renderCanvas = (ctx) => {
     drawText(ctx,
         "tan = a/b = " + tangent.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.9 },
-        "teal"
+        "magenta"
     )
 
     drawText(ctx,

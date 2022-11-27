@@ -200,7 +200,7 @@ const renderCanvas = (ctx) => {
     ;(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx,
         "tan = a/b = " + tangent.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.9 },
-        "teal"
+        "magenta"
     )
 
     ;(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx,
