@@ -82,7 +82,6 @@ const renderCanvas = (ctx) => {
     drawLine(ctx, A, B, "blue");
     drawText(ctx, "c:" + c.toFixed(1), average(A, B), "blue");
     
-
     // Style "arc"
     ctx.beginPath();
     ctx.strokeStyle = "black";
@@ -103,7 +102,6 @@ const renderCanvas = (ctx) => {
 
 };
 
-
 // *** Events *** 
  // Redraw the canvas on mouse move
 document.onmousemove = (event) => {
@@ -117,7 +115,6 @@ document.onmousemove = (event) => {
     // A is static, point 0 (center)
     renderCanvas(ctx);
 }
-
 
 // *** Start Drawing, render the canvas on load, before any mouse move event
 renderCanvas(ctx);
