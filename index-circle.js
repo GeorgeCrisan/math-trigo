@@ -119,6 +119,12 @@ document.onscroll = (event) => {
     renderCanvas(ctx);
 };
 
+// Allow for input from keyboard for tetha
+document.getElementById("tethaInput").onchange = (event) => {
+    theta = Number(event.target.value);
+    renderCanvas(ctx);
+};
+
 // On start set the position down to 5000px
 scrollTo(0, 5000);
 // *** Start Drawing, render the canvas on load, before any mouse move event

@@ -3,6 +3,9 @@
   position: fixed;
   overflow: hidden;
 }
+.canvasStyle input {
+  margin: 16px;
+}
 
 body {
   background-color: teal;
