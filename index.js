@@ -42,19 +42,19 @@ const renderCanvas = (ctx) => {
     drawText(ctx,
         "sin = a/c = " + sin.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.7 },
-        "black"
+        "green"
     )
 
     drawText(ctx,
         "cos = b/c = " + cos.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.8 },
-        "magenta"
+        "red"
     )
 
     drawText(ctx,
         "tan = a/b = " + tangent.toFixed(2),
         { x: - offset.x / 2, y: offset.y * 0.9 },
-        "teal"
+        "magenta"
     )
 
     drawText(ctx,
