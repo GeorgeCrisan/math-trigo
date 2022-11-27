@@ -88,7 +88,7 @@ const renderCanvas = (ctx) => {
     drawLine(ctx, C, A, "green");
     drawLine(ctx, A, B, "blue");
     drawLine(ctx, B, T, "magenta");
-    drawText(ctx, "Hypotenuse:" + c.toFixed(1), average(A, B), "blue");
+    drawText(ctx, "Hypotenuse:" + c, average(A, B), "blue");
     
 
     // Style "arc"

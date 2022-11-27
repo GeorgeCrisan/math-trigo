@@ -229,7 +229,7 @@ const renderCanvas = (ctx) => {
     (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, C, A, "green");
     (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, A, B, "blue");
     (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawLine)(ctx, B, T, "magenta");
-    (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "Hypotenuse:" + c.toFixed(1), (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "blue");
+    (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx, "Hypotenuse:" + c, (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.average)(A, B), "blue");
     
 
     // Style "arc"
