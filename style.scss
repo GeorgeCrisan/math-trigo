@@ -2,8 +2,18 @@
     background-color: honeydew;
     position: fixed;
     overflow: hidden;
-    input {
-        margin: 16px;
+    display: flex;
+    flex-flow: column;
+
+    .info {
+        padding: 16px;
+        border-top: 5px solid teal;
+        justify-content: center;
+        display: flex;
+        input {
+            border-left: 5px solid teal;
+            margin-left: 16px;
+        }
     }
 }
 
