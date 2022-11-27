@@ -127,6 +127,12 @@ document.getElementById("thetaInput").onchange = (event) => {
     renderCanvas(ctx);
 };
 
+document.getElementById("reset").onclick = (event) => {
+    theta = 0.84;
+    document.getElementById("thetaInput").value = theta;
+    renderCanvas(ctx);
+};
+
 // On start set the position down to 5000px
 scrollTo(0, 5000);
 // *** Start Drawing, render the canvas on load, before any mouse move event

@@ -19,10 +19,17 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .canvasStyle .info input {
   border-left: 5px solid teal;
   margin-left: 16px;
+  margin-right: 16px;
+  height: 30px;
+  font-size: 16px;
 }
 
 body {
@@ -30,5 +37,14 @@ body {
   margin: 0;
   height: 20000px;
   padding: 0;
+}
+
+.reset {
+  background: #faa600;
+  color: white;
+  width: 120px;
+  height: 30px;
+  margin-left: 16px;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */
