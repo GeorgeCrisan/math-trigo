@@ -1,6 +1,7 @@
 import { xyItem, drawCS, drawText, drawLine, average, toDeg } from "./helpers";
 
 let theta = Math.PI / 4;
+document.getElementById("thetaInput").value =  String(theta.toFixed(2));
 let c = 200;
 
 // Declare default points
@@ -115,13 +116,14 @@ document.onscroll = (event) => {
     if (scrollY < 5 || scrollY > 15000) {
         scrollTo(0, 5000);
     }
-
+    document.getElementById("thetaInput").value = String(theta.toFixed(2));
     renderCanvas(ctx);
 };
 
-// Allow for input from keyboard for tetha
-document.getElementById("tethaInput").onchange = (event) => {
+// Allow for input from keyboard for theta
+document.getElementById("thetaInput").onchange = (event) => {
     theta = Number(event.target.value);
+    document.getElementById("thetaInput").value = String(theta.toFixed(2));
     renderCanvas(ctx);
 };
 
