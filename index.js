@@ -58,7 +58,7 @@ const renderCanvas = (ctx) => {
     )
 
     drawText(ctx,
-        "Theta - Radiant:" + theta.toFixed(2) + " Degree: " + String(toDeg(theta)).padStart(2, " ") + "°",
+        "Theta - radian:" + theta.toFixed(2) + " Degree: " + String(toDeg(theta)).padStart(2, " ") + "°",
         { x: offset.x / 2, y: offset.y * 0.7 },
         "brown"
     )

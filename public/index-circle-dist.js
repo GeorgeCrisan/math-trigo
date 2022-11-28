@@ -204,7 +204,7 @@ const renderCanvas = (ctx) => {
     )
 
     ;(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.drawText)(ctx,
-        "Theta - Radiant:" + theta.toFixed(2) + " Degree: " + String((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toDeg)(theta)).padStart(2, " ") + "°",
+        "Theta - radian:" + theta.toFixed(2) + " Degree: " + String((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toDeg)(theta)).padStart(2, " ") + "°",
         { x: offset.x / 2, y: offset.y * 0.7 },
         "brown"
     )
